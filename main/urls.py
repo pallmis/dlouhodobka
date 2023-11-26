@@ -6,5 +6,6 @@ router = DefaultRouter()
 router.register(r'recipes', RecipeViewSet)
 
 urlpatterns = [
-    path("", include(router.urls))
+    path("", include(router.urls)),
+    path("recipes/<int:pk>/", RecipeViewSet.as_view({"get": "retrieve"}), name="recipe-detail"),
 ]
