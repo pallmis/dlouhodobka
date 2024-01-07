@@ -1,5 +1,19 @@
 from django.db import models
-# Create your models here.
+from django.contrib.auth.models import AbstractUser
+
+class Tag(models.Model):
+    name = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.name
+
+
+class User(AbstractUser):
+    nickname = models.CharField(max_length=255, blank=True)
+    
+    def __str__(self):
+        return self.username
+
 
 class Recipe(models.Model):
     DIFFICULTY_LEVELS = (
@@ -13,14 +27,11 @@ class Recipe(models.Model):
     difficulty = models.CharField(choices=DIFFICULTY_LEVELS, max_length=10)
     prep_time = models.PositiveIntegerField()
     prep_guide = models.TextField()
+    tags = models.ManyToManyField(Tag)
+    users_favorited = models.ManyToManyField(User, related_name='favorite_recipes')
 
-    def __str_(self):
+    def __str__(self):
         return "Recipe for {}".format(self.name)
-
-
-
-
-
 
 
 
