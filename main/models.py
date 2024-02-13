@@ -11,6 +11,9 @@ class Tag(models.Model):
 class User(AbstractUser):
     nickname = models.CharField(max_length=255, blank=True)
     
+    class Meta:
+        swappable = "AUTH_USER_MODEL"
+
     def __str__(self):
         return self.username
 
@@ -28,7 +31,7 @@ class Recipe(models.Model):
     prep_time = models.PositiveIntegerField()
     prep_guide = models.TextField()
     tags = models.ManyToManyField(Tag)
-    users_favorited = models.ManyToManyField(User, related_name='favorite_recipes')
+    users_favorited = models.ManyToManyField(User, related_name='favorited_recipes')
 
     def __str__(self):
         return "Recipe for {}".format(self.name)
