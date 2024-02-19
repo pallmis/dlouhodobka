@@ -7,7 +7,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-
+# upravit tak aby user měl jen pole "username"(primary key) a "password"
 class User(AbstractUser):
     nickname = models.CharField(max_length=255, blank=True)
     

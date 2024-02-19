@@ -44,6 +44,8 @@ def register(request):
     password = request.data.get('password')
     password2 = request.data.get('password2')
 
+    User = get_user_model()
+
     if User.objects.filter(username=username).exists():
         return Response({'message': 'Toto jméno je již zabrané'}, status=status.HTTP_400_BAD_REQUEST)
     
